@@ -1,0 +1,1 @@
+android/example/com/squawker/provider/generated/SquawkProvider.class
