@@ -15,16 +15,18 @@
 */
 package android.example.com.squawker.following;
 
+import android.content.SharedPreferences;
 import android.example.com.squawker.R;
 import android.os.Bundle;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreferenceCompat;
 
 /**
  * Shows the list of instructors you can follow
  */
-public class FollowingPreferenceFragment extends PreferenceFragmentCompat {
-
+public class FollowingPreferenceFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
     private final static String LOG_TAG = FollowingPreferenceFragment.class.getSimpleName();
 
     @Override
@@ -32,4 +34,20 @@ public class FollowingPreferenceFragment extends PreferenceFragmentCompat {
         // Add visualizer preferences, defined in the XML file in res->xml->preferences_squawker
         addPreferencesFromResource(R.xml.following_squawker);
     }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+        Preference preference = findPreference(s);
+
+        if(preference != null && preference instanceof SwitchPreferenceCompat) {
+            boolean isOn = sharedPreferences.getBoolean(s, false);
+
+            if(isOn) {
+                //subscribe to topic
+            } else {
+                //unsubscribe to topic
+            }
+        }
+    }
+
 }
